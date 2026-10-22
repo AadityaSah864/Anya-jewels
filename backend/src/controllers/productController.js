@@ -1,4 +1,10 @@
 const Product = require("../models/product");
+const mongoose = require("mongoose");
+
+// Validate MongoDB product ID
+const isValidProductId = (id) => {
+  return mongoose.isValidObjectId(id);
+};
 
 // Get all products
 const getProducts = async (req, res) => {
@@ -17,6 +23,12 @@ const getProducts = async (req, res) => {
 // Get one product
 const getProductById = async (req, res) => {
   try {
+    if (!isValidProductId(req.params.id)) {
+      return res.status(400).json({
+        message: "Invalid product ID",
+      });
+    }
+
     const product = await Product.findById(req.params.id);
 
     if (!product) {
@@ -47,9 +59,16 @@ const createProduct = async (req, res) => {
     });
   }
 };
+
 // Update product
 const updateProduct = async (req, res) => {
   try {
+    if (!isValidProductId(req.params.id)) {
+      return res.status(400).json({
+        message: "Invalid product ID",
+      });
+    }
+
     const product = await Product.findByIdAndUpdate(
       req.params.id,
       req.body,
@@ -73,9 +92,16 @@ const updateProduct = async (req, res) => {
     });
   }
 };
+
 // Delete product
 const deleteProduct = async (req, res) => {
   try {
+    if (!isValidProductId(req.params.id)) {
+      return res.status(400).json({
+        message: "Invalid product ID",
+      });
+    }
+
     const product = await Product.findByIdAndDelete(req.params.id);
 
     if (!product) {
