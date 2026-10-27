@@ -1,0 +1,153 @@
+
+.cart-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 5% 80px;
+}
+
+.cart-page > h1 {
+  margin: 12px 0 8px;
+  font-size: clamp(30px, 4vw, 42px);
+}
+
+.cart-count {
+  margin-bottom: 32px;
+  color: #85796b;
+}
+
+.cart-empty {
+  padding: 56px 20px;
+  text-align: center;
+  background: #faf7f2;
+}
+
+.cart-empty h2 {
+  font-size: 23px;
+}
+
+.cart-empty p {
+  color: #796b5c;
+  line-height: 1.7;
+}
+
+.cart-shop-button,
+.cart-checkout-button {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 13px 20px;
+  border: 1px solid #725536;
+  background: #725536;
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  font: inherit;
+}
+
+.cart-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(250px, 0.8fr);
+  gap: 40px;
+  align-items: start;
+}
+
+.cart-item {
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr) auto;
+  gap: 20px;
+  padding: 22px 0;
+  border-bottom: 1px solid #e6ded2;
+}
+
+.cart-item-image img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+.cart-item-info h2 {
+  margin: 6px 0 12px;
+  font-size: 18px;
+}
+
+.cart-item-price,
+.cart-line-total {
+  color: #725536;
+  font-weight: 600;
+}
+
+.quantity-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 16px;
+  font-size: 14px;
+}
+
+.quantity-label select {
+  padding: 6px 10px;
+  border: 1px solid #e6ded2;
+  background: white;
+  font: inherit;
+}
+
+.cart-remove-button {
+  display: block;
+  margin-top: 12px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #8c5148;
+  text-decoration: underline;
+  cursor: pointer;
+  font: inherit;
+  font-size: 14px;
+}
+
+.cart-summary {
+  padding: 24px;
+  background: #faf7f2;
+}
+
+.cart-summary h2 {
+  margin-top: 0;
+  font-size: 21px;
+}
+
+.cart-summary-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 0;
+  border-top: 1px solid #e6ded2;
+  font-weight: 600;
+}
+
+.cart-shipping-note {
+  color: #796b5c;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.cart-checkout-button {
+  width: 100%;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+@media (max-width: 750px) {
+  .cart-layout {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .cart-item {
+    grid-template-columns: 90px minmax(0, 1fr);
+    gap: 14px;
+  }
+
+  .cart-line-total {
+    grid-column: 2;
+    margin: 0;
+  }
+}
