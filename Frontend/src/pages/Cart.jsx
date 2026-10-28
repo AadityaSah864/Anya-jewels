@@ -1,16 +1,13 @@
-
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
+
 import "./Cart.css";
 
 function Cart() {
-  const {
-    cartItems,
-    cartCount,
-    cartSubtotal,
-    updateQuantity,
-    removeFromCart,
-  } = useCart();
+  const navigate = useNavigate();
+
+  const { cartItems, cartCount, cartSubtotal, updateQuantity, removeFromCart } =
+    useCart();
 
   return (
     <main className="cart-page">
@@ -36,8 +33,7 @@ function Cart() {
           <div className="cart-items">
             {cartItems.map((item) => {
               const price =
-                item.discountPrice != null &&
-                item.discountPrice < item.price
+                item.discountPrice != null && item.discountPrice < item.price
                   ? item.discountPrice
                   : item.price;
 
@@ -66,15 +62,12 @@ function Cart() {
                       <select
                         value={item.quantity}
                         onChange={(event) =>
-                          updateQuantity(
-                            item._id,
-                            Number(event.target.value)
-                          )
+                          updateQuantity(item._id, Number(event.target.value))
                         }
                       >
                         {Array.from(
                           { length: Math.max(0, item.stock) },
-                          (_, index) => index + 1
+                          (_, index) => index + 1,
                         ).map((quantity) => (
                           <option key={quantity} value={quantity}>
                             {quantity}
@@ -115,10 +108,9 @@ function Cart() {
             <button
               type="button"
               className="cart-checkout-button"
-              disabled
-              title="Checkout will be added in a future step"
+              onClick={() => navigate("/checkout")}
             >
-              Checkout — Coming soon
+              Proceed to Checkout
             </button>
           </aside>
         </div>

@@ -1,0 +1,152 @@
+
+.checkout-page {
+  width: min(1100px, 92%);
+  margin: 0 auto;
+  padding: 48px 0 80px;
+  color: #29231f;
+}
+
+.checkout-page h1 {
+  margin: 24px 0 8px;
+  font-size: clamp(2rem, 5vw, 3rem);
+}
+
+.checkout-intro {
+  color: #716963;
+  margin-bottom: 32px;
+}
+
+.checkout-back-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.checkout-back-link:hover {
+  text-decoration: underline;
+}
+
+.checkout-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.8fr);
+  gap: 36px;
+  align-items: start;
+}
+
+.checkout-form,
+.checkout-summary {
+  padding: 28px;
+  border: 1px solid #e8e0d9;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.checkout-form h2,
+.checkout-summary h2 {
+  margin: 0 0 22px;
+  font-size: 1.25rem;
+}
+
+.checkout-form h2:not(:first-child) {
+  margin-top: 30px;
+}
+
+.checkout-form label {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 18px;
+  font-size: 0.92rem;
+  font-weight: 500;
+}
+
+.checkout-form input,
+.checkout-form textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 14px;
+  border: 1px solid #dcd3cb;
+  border-radius: 7px;
+  background: #fff;
+  color: inherit;
+  font: inherit;
+}
+
+.checkout-form input:focus,
+.checkout-form textarea:focus {
+  outline: 2px solid #9b7860;
+  outline-offset: 2px;
+}
+
+.checkout-form textarea {
+  resize: vertical;
+}
+
+.checkout-button {
+  display: inline-block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 14px 18px;
+  border: none;
+  border-radius: 7px;
+  background: #29231f;
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.checkout-button:hover {
+  background: #49382e;
+}
+
+.checkout-summary-item,
+.checkout-total {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid #eee7e1;
+}
+
+.checkout-summary-item p {
+  margin: 0 0 6px;
+}
+
+.checkout-summary-item span,
+.checkout-shipping-note {
+  color: #716963;
+  font-size: 0.88rem;
+}
+
+.checkout-summary-item strong {
+  white-space: nowrap;
+}
+
+.checkout-total {
+  margin-top: 8px;
+  border-bottom: none;
+  font-size: 1.05rem;
+}
+
+.checkout-notice {
+  margin-top: 16px;
+  color: #426344;
+  line-height: 1.5;
+}
+
+@media (max-width: 700px) {
+  .checkout-page {
+    padding-top: 28px;
+  }
+
+  .checkout-layout {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .checkout-form,
+  .checkout-summary {
+    padding: 20px;
+  }
+}

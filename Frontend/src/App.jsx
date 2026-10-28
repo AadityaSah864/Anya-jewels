@@ -4,6 +4,7 @@ import { Routes, Route, Link } from "react-router-dom";
 import { getProducts } from "./api/product";
 import ProductDetails from "./pages/ProductDetails";
 import Cart from "./pages/Cart";
+import Checkout from "./pages/Checkout";
 import { useCart } from "./context/CartContext";
 import "./App.css";
 
@@ -67,23 +68,26 @@ function App() {
     return matchesSearch && matchesCategory;
   });
 
-  return (
-    <Routes>
-      <Route path="/cart" element={<Cart />} />
-      <Route
-        path="/products/:id"
-        element={<ProductDetails />}
-      />
+ return (
+  <Routes>
+    <Route path="/cart" element={<Cart />} />
 
-      {/* Main storefront */}
-      <Route
-        path="/"
-        element={
-          <div className="site-wrapper">
-            <div className="announcement">
-              A LITTLE SPARKLE GOES A LONG WAY ✨
-            </div>
+    {/* Add this new checkout route */}
+    <Route path="/checkout" element={<Checkout />} />
 
+    <Route
+      path="/products/:id"
+      element={<ProductDetails />}
+    />
+
+    {/* Main storefront */}
+    <Route
+      path="/"
+      element={
+        <div className="site-wrapper">
+          <div className="announcement">
+            A LITTLE SPARKLE GOES A LONG WAY ✨
+          </div>
             <header className="navbar">
               <a className="brand" href="#home">
                 ANYA <span>JEWELLS</span>
