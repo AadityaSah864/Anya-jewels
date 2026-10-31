@@ -150,3 +150,16 @@
     padding: 20px;
   }
 }
+.order-success {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.order-success h1 {
+  margin-bottom: 16px;
+}
+
+.order-success p {
+  margin-bottom: 24px;
+  line-height: 1.6;
+}

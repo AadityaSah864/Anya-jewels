@@ -6,6 +6,8 @@ import ProductDetails from "./pages/ProductDetails";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import { useCart } from "./context/CartContext";
+import AdminOrders from "./pages/AdminOrders";
+import heroImage from "./assets/hero.png";
 import "./App.css";
 
 function App() {
@@ -14,7 +16,6 @@ function App() {
   const [error, setError] = useState("");
   const { cartCount } = useCart();
 
-  // Search and category filter state
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
 
@@ -38,17 +39,13 @@ function App() {
     loadProducts();
   }, []);
 
-  // Get unique categories from the products
   const categories = [
     "All",
     ...new Set(
-      products
-        .map((product) => product.category?.trim())
-        .filter(Boolean)
+      products.map((product) => product.category?.trim()).filter(Boolean)
     ),
   ];
 
-  // Filter products by search text and selected category
   const filteredProducts = products.filter((product) => {
     const search = searchTerm.trim().toLowerCase();
 
@@ -62,36 +59,35 @@ function App() {
 
     const matchesCategory =
       selectedCategory === "All" ||
-      product.category?.toLowerCase() ===
-        selectedCategory.toLowerCase();
+      product.category?.toLowerCase() === selectedCategory.toLowerCase();
 
     return matchesSearch && matchesCategory;
   });
 
- return (
-  <Routes>
-    <Route path="/cart" element={<Cart />} />
+  return (
+    <Routes>
+      <Route path="/cart" element={<Cart />} />
+      <Route path="/checkout" element={<Checkout />} />
+      <Route path="/admin/orders" element={<AdminOrders />} />
+      <Route path="/products/:id" element={<ProductDetails />} />
 
-    {/* Add this new checkout route */}
-    <Route path="/checkout" element={<Checkout />} />
+      <Route
+        path="/"
+        element={
+          <div className="site-wrapper">
+            {/* Announcement */}
+            <div className="announcement">
+              <span>✦</span>
+              A LITTLE SPARKLE GOES A LONG WAY
+              <span>✦</span>
+            </div>
 
-    <Route
-      path="/products/:id"
-      element={<ProductDetails />}
-    />
-
-    {/* Main storefront */}
-    <Route
-      path="/"
-      element={
-        <div className="site-wrapper">
-          <div className="announcement">
-            A LITTLE SPARKLE GOES A LONG WAY ✨
-          </div>
+            {/* Navigation */}
             <header className="navbar">
-              <a className="brand" href="#home">
-                ANYA <span>JEWELLS</span>
-              </a>
+              <Link className="brand" to="/">
+                ANYA
+                <span>JEWELLS</span>
+              </Link>
 
               <nav className="nav-links">
                 <a href="#home">Home</a>
@@ -99,17 +95,34 @@ function App() {
                 <a href="#about">Our Story</a>
               </nav>
 
-              <a className="shop-link" href="#collections">
-                Explore <span>↗</span>
-                <Link to="/cart" className="shop-link">
-                Bag ({cartCount})
+              <div className="nav-actions">
+                <a className="shop-link explore-link" href="#collections">
+                  Explore ↗
+                </a>
+
+                <Link to="/cart" className="shop-link bag-link">
+                  Bag ({cartCount})
                 </Link>
-              </a>
+
+                <Link to="/admin/orders" className="shop-link admin-link">
+                  Admin
+                </Link>
+              </div>
             </header>
 
             <main>
-              {/* Hero section */}
+              {/* Hero */}
               <section className="hero" id="home">
+                <div className="hero-background">
+                  <img
+                    src={heroImage}
+                    alt="Gold jewellery styled with soft blush fabric and flowers"
+                    fetchPriority="high"
+                  />
+                </div>
+
+                <div className="hero-overlay"></div>
+
                 <div className="hero-content">
                   <p className="eyebrow">
                     JEWELLERY THAT FEELS LIKE YOU
@@ -135,55 +148,38 @@ function App() {
                   </p>
                 </div>
 
-                <div className="hero-image">
-                  <img
-                    src="/src/assets/hero.png"
-                    alt="Anya Jewells jewellery collection"
-                  />
-
-                  <div className="image-caption">
-                    <span>THE ANYA EDIT</span>
-                    <span>01 / TIMELESS</span>
-                  </div>
+                <div className="hero-image-label">
+                  <span>THE ANYA EDIT</span>
+                  <span>01 / TIMELESS</span>
                 </div>
               </section>
 
-              {/* Products from MongoDB */}
-              <section
-                className="collections-section"
-                id="collections"
-              >
+              {/* Collections */}
+              <section className="collections-section" id="collections">
                 <div className="section-heading">
                   <div>
-                    <p className="eyebrow">
-                      THE ANYA COLLECTION
-                    </p>
-
+                    <p className="eyebrow">THE ANYA COLLECTION</p>
                     <h2>
                       Little things, <em>lovingly chosen.</em>
                     </h2>
                   </div>
 
                   <p className="section-description">
-                    Discover jewellery for your everyday moments
-                    and special occasions.
+                    Discover jewellery for your everyday moments and
+                    special occasions.
                   </p>
                 </div>
 
                 {loading && (
                   <p className="products-message" role="status">
-                    Loading our jewellery collection...
+                    Preparing something beautiful for you...
                   </p>
                 )}
 
                 {!loading && error && (
-                  <div
-                    className="products-message error-message"
-                    role="alert"
-                  >
+                  <div className="products-message error-message" role="alert">
                     <p>We couldn't load our jewellery collection.</p>
                     <p>{error}</p>
-
                     <button
                       className="retry-button"
                       onClick={() => window.location.reload()}
@@ -195,18 +191,15 @@ function App() {
 
                 {!loading && !error && products.length === 0 && (
                   <p className="products-message">
-                    No products yet. Check back soon for our jewellery
-                    collection.
+                    Our collection is getting ready. Please check back soon.
                   </p>
                 )}
 
                 {!loading && !error && products.length > 0 && (
                   <>
-                    {/* Search and category filters */}
                     <div className="product-controls">
                       <label className="search-box">
                         <span aria-hidden="true">⌕</span>
-
                         <input
                           type="search"
                           placeholder="Search jewellery..."
@@ -227,16 +220,10 @@ function App() {
                             key={category}
                             type="button"
                             className={`category-button ${
-                              selectedCategory === category
-                                ? "active"
-                                : ""
+                              selectedCategory === category ? "active" : ""
                             }`}
-                            aria-pressed={
-                              selectedCategory === category
-                            }
-                            onClick={() =>
-                              setSelectedCategory(category)
-                            }
+                            aria-pressed={selectedCategory === category}
+                            onClick={() => setSelectedCategory(category)}
                           >
                             {category}
                           </button>
@@ -247,12 +234,11 @@ function App() {
                     <p className="results-count" aria-live="polite">
                       {filteredProducts.length}{" "}
                       {filteredProducts.length === 1
-                        ? "product"
-                        : "products"}{" "}
+                        ? "piece"
+                        : "pieces"}{" "}
                       found
                     </p>
 
-                    {/* Clickable product cards */}
                     {filteredProducts.length > 0 ? (
                       <div className="collection-grid">
                         {filteredProducts.map((product) => (
@@ -280,6 +266,12 @@ function App() {
                                     SALE
                                   </span>
                                 )}
+
+                              {product.stock === 0 && (
+                                <span className="sold-out-badge">
+                                  SOLD OUT
+                                </span>
+                              )}
                             </div>
 
                             <div className="collection-info">
@@ -298,10 +290,8 @@ function App() {
                                         Rs.{" "}
                                         {product.discountPrice.toLocaleString()}
                                       </span>
-
                                       <span className="original-price">
-                                        Rs.{" "}
-                                        {product.price.toLocaleString()}
+                                        Rs. {product.price.toLocaleString()}
                                       </span>
                                     </>
                                   ) : (
@@ -310,13 +300,9 @@ function App() {
                                     </span>
                                   )}
                                 </div>
-
-                                {product.stock === 0 && (
-                                  <p className="stock-message">
-                                    Currently out of stock
-                                  </p>
-                                )}
                               </div>
+
+                              <span className="product-arrow">↗</span>
                             </div>
                           </Link>
                         ))}
@@ -346,44 +332,59 @@ function App() {
 
               {/* Brand story */}
               <section className="story-section" id="about">
-                <p className="eyebrow">
-                  A LITTLE SOMETHING ABOUT US
-                </p>
+                <div className="story-decoration">✧</div>
+
+                <p className="eyebrow">A LITTLE ABOUT US</p>
 
                 <h2>
-                  Not just jewellery.
+                  Some things are
                   <br />
-                  <em>A feeling.</em>
+                  small, but mean
+                  <br />
+                  <em>everything.</em>
                 </h2>
 
                 <p>
-                  At Anya Jewells, we believe the smallest details
-                  can make the most beautiful memories.
+                  We believe jewellery is more than something you wear.
+                  It's the little reminder of who you are, the moments
+                  you cherish, and the memories you carry.
                 </p>
 
                 <a className="story-link" href="#collections">
-                  Find your piece <span>→</span>
+                  Find a piece to call yours <span>↗</span>
                 </a>
               </section>
+
+              {/* Footer */}
+              <footer className="footer">
+                <div className="footer-main">
+                  <div className="footer-brand">
+                    <Link className="brand" to="/">
+                      ANYA
+                      <span>JEWELLS</span>
+                    </Link>
+
+                    <p>Little treasures. Beautiful memories.</p>
+                  </div>
+
+                  <div className="footer-links">
+                    <a href="#home">Home</a>
+                    <a href="#collections">Collections</a>
+                    <a href="#about">Our Story</a>
+                    <Link to="/cart">Your Bag ({cartCount})</Link>
+                  </div>
+                </div>
+
+                <div className="footer-bottom">
+                  <span>© {new Date().getFullYear()} Anya Jewells</span>
+                  <span>MADE WITH LOVE ✧</span>
+                </div>
+              </footer>
             </main>
-
-            {/* Footer */}
-            <footer className="footer">
-              <a className="brand" href="#home">
-                ANYA <span>JEWELLS</span>
-              </a>
-
-              <p>Little treasures, lasting memories.</p>
-
-              <span>
-                © {new Date().getFullYear()} Anya Jewells
-              </span>
-            </footer>
           </div>
         }
       />
 
-      {/* Unknown URLs */}
       <Route
         path="*"
         element={

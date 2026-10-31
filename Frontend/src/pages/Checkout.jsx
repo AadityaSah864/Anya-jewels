@@ -2,24 +2,102 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
+import { createOrder } from "../api/order";
 import "./Checkout.css";
 
 function Checkout() {
-  const { cartItems, cartSubtotal } = useCart();
-  const [message, setMessage] = useState("");
+  const {
+    cartItems,
+    cartSubtotal,
+    clearCart,
+  } = useCart();
 
-  const handleSubmit = (event) => {
+  const [message, setMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState("");
+  const [orderPlaced, setOrderPlaced] = useState(false);
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    setMessage(
-      "Your details are valid. Order submission will be connected next."
-    );
+
+    setMessage("");
+    setError("");
+
+    if (isSubmitting) return;
+
+    setIsSubmitting(true);
+
+    try {
+      const formData = new FormData(event.currentTarget);
+
+      const orderData = {
+        customer: {
+          fullName: formData.get("fullName").trim(),
+          email: formData.get("email").trim(),
+          phone: formData.get("phone").trim(),
+        },
+
+        shippingAddress: {
+          address: formData.get("address").trim(),
+          city: formData.get("city").trim(),
+          province: formData.get("province").trim(),
+        },
+
+        items: cartItems.map((item) => ({
+          product: item._id,
+          quantity: item.quantity,
+        })),
+      };
+
+      // Send order to backend
+      const result = await createOrder(orderData);
+
+      // Clear cart only after successful order creation
+      clearCart();
+
+      setMessage(
+        result.message || "Your order was placed successfully!"
+      );
+
+      // Display order success screen
+      setOrderPlaced(true);
+
+    } catch (error) {
+      setError(
+        error.message || "Something went wrong. Please try again."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
+  // Show success screen after successful order creation
+  if (orderPlaced) {
+    return (
+      <main className="checkout-page">
+        <div className="order-success">
+          <h1>Order placed successfully!</h1>
+
+          <p>
+            Thank you for shopping with Anya Jewells.
+            Your order has been received.
+          </p>
+
+          <Link to="/" className="checkout-button">
+            Continue shopping
+          </Link>
+        </div>
+      </main>
+    );
+  }
+
+  // Show empty cart if there are no products
   if (cartItems.length === 0) {
     return (
       <main className="checkout-page">
         <h1>Your bag is empty</h1>
         <p>Add some jewellery before checking out.</p>
+
         <Link to="/" className="checkout-button">
           Explore the collection
         </Link>
@@ -34,12 +112,16 @@ function Checkout() {
       </Link>
 
       <h1>Checkout</h1>
+
       <p className="checkout-intro">
         A few details, then your next favourite piece is almost yours.
       </p>
 
       <div className="checkout-layout">
-        <form className="checkout-form" onSubmit={handleSubmit}>
+        <form
+          className="checkout-form"
+          onSubmit={handleSubmit}
+        >
           <h2>Contact information</h2>
 
           <label>
@@ -113,9 +195,19 @@ function Checkout() {
             />
           </label>
 
-          <button type="submit" className="checkout-button">
-            Continue
+          <button
+            type="submit"
+            className="checkout-button"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? "Placing order..." : "Place order"}
           </button>
+
+          {error && (
+            <p className="checkout-notice" role="alert">
+              {error}
+            </p>
+          )}
 
           {message && (
             <p className="checkout-notice" role="status">
@@ -135,11 +227,15 @@ function Checkout() {
                 : item.price;
 
             return (
-              <div className="checkout-summary-item" key={item._id}>
+              <div
+                className="checkout-summary-item"
+                key={item._id}
+              >
                 <div>
                   <p>{item.name}</p>
                   <span>Quantity: {item.quantity}</span>
                 </div>
+
                 <strong>
                   Rs. {(price * item.quantity).toLocaleString()}
                 </strong>
@@ -149,12 +245,15 @@ function Checkout() {
 
           <div className="checkout-total">
             <span>Subtotal</span>
-            <strong>Rs. {cartSubtotal.toLocaleString()}</strong>
+
+            <strong>
+              Rs. {cartSubtotal.toLocaleString()}
+            </strong>
           </div>
 
           <p className="checkout-shipping-note">
-            Shipping charges will be confirmed when order processing is
-            implemented.
+            Shipping charges will be confirmed when order
+            processing is implemented.
           </p>
         </aside>
       </div>

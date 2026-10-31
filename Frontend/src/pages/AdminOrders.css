@@ -1,0 +1,868 @@
+
+/* =========================================
+   ANYA JEWELLS - ADMIN DASHBOARD
+   Luxury Minimal Design
+========================================= */
+
+.admin-layout {
+  --admin-bg: #f7f6f2;
+  --admin-white: #ffffff;
+  --admin-dark: #302b25;
+  --admin-muted: #92897e;
+  --admin-gold: #a98555;
+  --admin-border: #eae6df;
+
+  display: flex;
+  min-height: 100vh;
+  background: var(--admin-bg);
+  color: var(--admin-dark);
+  font-family: "DM Sans", sans-serif;
+}
+
+/* =========================================
+   SIDEBAR
+========================================= */
+
+.admin-sidebar {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  width: 245px;
+  height: 100vh;
+  padding: 32px 20px 22px;
+  background: #fffefa;
+  border-right: 1px solid var(--admin-border);
+}
+
+.admin-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 0 25px;
+  color: var(--admin-dark);
+  text-decoration: none;
+}
+
+.admin-brand-name {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 29px;
+  letter-spacing: 5px;
+}
+
+.admin-brand-subtitle {
+  font-size: 9px;
+  letter-spacing: 5px;
+}
+
+.sidebar-divider {
+  height: 1px;
+  background: var(--admin-border);
+}
+
+.sidebar-label {
+  margin: 30px 0 13px 10px;
+  color: #aaa094;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 1.7px;
+}
+
+.admin-navigation {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 13px 12px;
+  border-radius: 6px;
+  color: #777066;
+  font-size: 12px;
+  text-decoration: none;
+  transition: 0.2s ease;
+}
+
+.sidebar-link:hover {
+  background: #f5f0e8;
+  color: var(--admin-dark);
+}
+
+.sidebar-link.active {
+  background: #f1ebe1;
+  color: #85643d;
+  font-weight: 600;
+}
+
+.sidebar-icon {
+  width: 20px;
+  font-size: 18px;
+  text-align: center;
+}
+
+.sidebar-bottom {
+  margin-top: auto;
+}
+
+.sidebar-store-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 19px 10px;
+  color: #766b5f;
+  font-size: 12px;
+  text-decoration: none;
+}
+
+.sidebar-store-link:hover {
+  color: var(--admin-gold);
+}
+
+.admin-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 5px 5px;
+  border-top: 1px solid var(--admin-border);
+}
+
+.profile-avatar {
+  display: grid;
+  width: 37px;
+  height: 37px;
+  place-items: center;
+  border-radius: 50%;
+  background: #eee5d8;
+  color: #85643d;
+  font-family: "Playfair Display", serif;
+  font-size: 18px;
+}
+
+.admin-profile div:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.admin-profile strong {
+  font-size: 11px;
+}
+
+.admin-profile span {
+  color: var(--admin-muted);
+  font-size: 10px;
+}
+
+/* =========================================
+   MAIN CONTENT
+========================================= */
+
+.admin-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.admin-topbar {
+  min-height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5%;
+  background: #fffefa;
+  border-bottom: 1px solid var(--admin-border);
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #a39a8f;
+  font-size: 11px;
+}
+
+.breadcrumb strong {
+  color: var(--admin-dark);
+  font-weight: 600;
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #81786c;
+  font-size: 11px;
+}
+
+.admin-online-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #6d9b76;
+}
+
+.admin-content {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 45px 5% 25px;
+}
+
+/* =========================================
+   PAGE HEADER
+========================================= */
+
+.admin-welcome {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+  margin-bottom: 35px;
+}
+
+.admin-eyebrow {
+  margin: 0 0 12px;
+  color: var(--admin-gold);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+.admin-welcome h1 {
+  margin: 0;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(30px, 3vw, 40px);
+  font-weight: 400;
+  letter-spacing: -0.8px;
+}
+
+.admin-welcome-text {
+  margin: 10px 0 0;
+  color: var(--admin-muted);
+  font-size: 12px;
+}
+
+.view-store-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 13px 18px;
+  border: 1px solid #ddd2c1;
+  border-radius: 4px;
+  color: #745737;
+  font-size: 11px;
+  text-decoration: none;
+  transition: 0.2s ease;
+}
+
+.view-store-button:hover {
+  background: #f0e9df;
+}
+
+/* =========================================
+   STATISTICS CARDS
+========================================= */
+
+.admin-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 19px;
+  margin-bottom: 42px;
+}
+
+.admin-stat-card {
+  min-width: 0;
+  padding: 23px;
+  background: var(--admin-white);
+  border: 1px solid var(--admin-border);
+  border-radius: 7px;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.admin-stat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgb(48 43 37 / 5%);
+}
+
+.stat-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.stat-label {
+  color: #91877b;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+}
+
+.stat-icon {
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  border-radius: 50%;
+  background: #f5f0e8;
+  color: #a17d4e;
+  font-size: 17px;
+}
+
+.admin-stat-card h2 {
+  margin: 19px 0 7px;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 31px;
+  font-weight: 400;
+}
+
+.admin-stat-card h2.revenue-value {
+  font-size: clamp(19px, 2vw, 27px);
+  overflow-wrap: anywhere;
+}
+
+.admin-stat-card > p {
+  margin: 0;
+  color: #a39a8f;
+  font-size: 10px;
+}
+
+/* =========================================
+   ORDERS SECTION
+========================================= */
+
+.admin-orders-section {
+  padding: 25px;
+  background: var(--admin-white);
+  border: 1px solid var(--admin-border);
+  border-radius: 7px;
+}
+
+.orders-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 26px;
+}
+
+.orders-heading .admin-eyebrow {
+  margin-bottom: 9px;
+}
+
+.orders-heading h2 {
+  margin: 0;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 25px;
+  font-weight: 400;
+}
+
+.orders-heading > div > p:last-child {
+  margin: 7px 0 0;
+  color: var(--admin-muted);
+  font-size: 11px;
+}
+
+.orders-count {
+  padding: 8px 12px;
+  border-radius: 3px;
+  background: #f5f0e8;
+  color: #866640;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.7px;
+}
+
+/* =========================================
+   SEARCH AND FILTER
+========================================= */
+
+.orders-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.admin-search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 350px;
+  min-height: 41px;
+  padding: 0 13px;
+  border: 1px solid var(--admin-border);
+  border-radius: 4px;
+  color: #9c9083;
+}
+
+.admin-search:focus-within {
+  border-color: var(--admin-gold);
+}
+
+.admin-search > span {
+  font-size: 23px;
+}
+
+.admin-search input {
+  width: 100%;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--admin-dark);
+  font: inherit;
+  font-size: 11px;
+}
+
+.admin-search input::placeholder {
+  color: #aaa196;
+}
+
+.admin-filter {
+  min-height: 41px;
+  padding: 0 12px;
+  border: 1px solid var(--admin-border);
+  border-radius: 4px;
+  outline: none;
+  background: white;
+  color: #776c60;
+  font: inherit;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.admin-filter:focus {
+  border-color: var(--admin-gold);
+}
+
+/* =========================================
+   ORDERS TABLE
+========================================= */
+
+.orders-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.orders-table {
+  width: 100%;
+  min-width: 800px;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.orders-table th {
+  padding: 14px 13px;
+  background: #faf9f6;
+  color: #958b7e;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+}
+
+.orders-table td {
+  padding: 17px 13px;
+  border-bottom: 1px solid #f0ede8;
+  font-size: 11px;
+  vertical-align: middle;
+}
+
+.orders-table tbody tr {
+  transition: background 0.2s ease;
+}
+
+.orders-table tbody tr:hover {
+  background: #fdfcf9;
+}
+
+.order-id {
+  color: #997548;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.order-customer {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.order-customer strong {
+  color: #39332c;
+  font-size: 11px;
+}
+
+.order-customer span {
+  color: #999084;
+  font-size: 10px;
+}
+
+.order-products {
+  min-width: 115px;
+}
+
+.order-products p {
+  margin: 4px 0;
+  color: #71685e;
+  font-size: 10px;
+}
+
+.order-total {
+  color: #433a30;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.order-date {
+  color: #857b70;
+  white-space: nowrap;
+}
+
+/* =========================================
+   ORDER STATUS
+========================================= */
+
+.order-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 10px;
+  border-radius: 30px;
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.status-pending {
+  background: #fff3df;
+  color: #a7782e;
+}
+
+.status-processing {
+  background: #eaf0fc;
+  color: #4c699f;
+}
+
+.status-shipped {
+  background: #e9f3f0;
+  color: #4a8270;
+}
+
+.status-delivered {
+  background: #e8f2e8;
+  color: #4c8151;
+}
+
+.status-cancelled {
+  background: #fbecea;
+  color: #aa5b51;
+}
+
+/* =========================================
+   TABLE FOOTER AND EMPTY STATE
+========================================= */
+
+.orders-footer {
+  padding-top: 18px;
+  color: #9a9186;
+  font-size: 10px;
+}
+
+.admin-empty {
+  padding: 65px 20px;
+  text-align: center;
+}
+
+.empty-icon {
+  display: inline-grid;
+  width: 52px;
+  height: 52px;
+  place-items: center;
+  border-radius: 50%;
+  background: #f5f0e8;
+  color: var(--admin-gold);
+  font-size: 25px;
+}
+
+.admin-empty h3 {
+  margin: 17px 0 8px;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 22px;
+  font-weight: 400;
+}
+
+.admin-empty p {
+  color: var(--admin-muted);
+  font-size: 11px;
+}
+
+.clear-filter-button {
+  margin-top: 12px;
+  padding: 10px 17px;
+  border: 1px solid #ddd2c1;
+  border-radius: 4px;
+  background: transparent;
+  color: #795d3d;
+  font: inherit;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.clear-filter-button:hover {
+  background: #f5f0e8;
+}
+
+/* =========================================
+   LOADING AND ERROR
+========================================= */
+
+.admin-state {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  background: var(--admin-bg);
+  color: var(--admin-muted);
+  font-size: 12px;
+}
+
+.admin-loader {
+  width: 32px;
+  height: 32px;
+  border: 3px solid #e9e1d6;
+  border-top-color: #a98555;
+  border-radius: 50%;
+  animation: admin-spin 0.8s linear infinite;
+}
+
+@keyframes admin-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.admin-error-card {
+  max-width: 400px;
+  padding: 35px;
+  text-align: center;
+  background: white;
+  border: 1px solid var(--admin-border);
+  border-radius: 8px;
+}
+
+.admin-error-icon {
+  display: grid;
+  width: 40px;
+  height: 40px;
+  margin: 0 auto 15px;
+  place-items: center;
+  border-radius: 50%;
+  background: #fbecea;
+  color: #aa5b51;
+}
+
+.admin-error-card h2 {
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 400;
+}
+
+.admin-error-card p {
+  color: var(--admin-muted);
+  font-size: 12px;
+}
+
+.admin-error-card button {
+  margin-top: 15px;
+  padding: 11px 20px;
+  border: none;
+  background: var(--admin-dark);
+  color: white;
+  cursor: pointer;
+}
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.admin-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 30px 0 5px;
+  color: #a29a8e;
+  font-size: 10px;
+}
+
+/* =========================================
+   RESPONSIVE DESIGN
+========================================= */
+
+@media (max-width: 1050px) {
+  .admin-sidebar {
+    width: 205px;
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+
+  .admin-content {
+    padding-right: 3%;
+    padding-left: 3%;
+  }
+
+  .admin-stat-card {
+    padding: 18px;
+  }
+
+  .admin-orders-section {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 760px) {
+  .admin-layout {
+    flex-direction: column;
+  }
+
+  .admin-sidebar {
+    position: relative;
+    width: 100%;
+    height: auto;
+    padding: 15px 5%;
+    border-right: none;
+    border-bottom: 1px solid var(--admin-border);
+  }
+
+  .admin-brand {
+    align-items: flex-start;
+    padding: 3px 0 13px;
+  }
+
+  .admin-brand-name {
+    font-size: 23px;
+  }
+
+  .admin-brand-subtitle {
+    font-size: 8px;
+  }
+
+  .sidebar-divider,
+  .sidebar-label,
+  .sidebar-bottom {
+    display: none;
+  }
+
+  .admin-navigation {
+    flex-direction: row;
+    gap: 8px;
+  }
+
+  .sidebar-link {
+    padding: 10px 12px;
+  }
+
+  .admin-topbar {
+    min-height: 55px;
+    padding: 0 5%;
+  }
+
+  .admin-content {
+    padding: 30px 5% 20px;
+  }
+
+  .admin-welcome {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 18px;
+    margin-bottom: 26px;
+  }
+
+  .admin-stats {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+
+  .admin-stat-card {
+    padding: 20px;
+  }
+
+  .admin-stat-card h2 {
+    margin-top: 12px;
+  }
+
+  .admin-orders-section {
+    padding: 17px 13px;
+  }
+
+  .orders-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .orders-toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .admin-search {
+    max-width: none;
+  }
+
+  .admin-filter {
+    width: 100%;
+  }
+
+  .admin-footer {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 380px) {
+  .admin-welcome h1 {
+    font-size: 29px;
+  }
+
+  .breadcrumb {
+    gap: 7px;
+    font-size: 10px;
+  }
+
+  .topbar-right {
+    font-size: 9px;
+  }
+
+  .admin-content {
+    padding-right: 4%;
+    padding-left: 4%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .admin-layout *,
+  .admin-layout *::before,
+  .admin-layout *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
